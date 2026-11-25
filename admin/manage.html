@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإدارة — لوحة تحكم بيسان</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#006184">
+  <link rel="icon" href="../assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body class="admin-body is-loading" data-menu="">
+<div class="admin-backdrop" data-admin-close></div>
+
+<aside id="admin-sidebar" class="admin-sidebar" aria-label="قائمة لوحة التحكم">
+  <div>
+    <a href="index.html" class="admin-brand c-on-surface">
+      <img src="../assets/img/logo.png" data-admin-logo alt="">
+      <span>
+        <span class="t-title-md d-block"><span data-admin-company>بيسان</span> للإدارة</span>
+        <span class="t-label-sm c-variant d-block">لوحة تحكم المشرف</span>
+      </span>
+    </a>
+    <nav class="admin-nav" id="adminNav"></nav>
+  </div>
+  <div class="admin-nav divider-top pt-2">
+    <button type="button" class="nav-btn logout" data-logout><span><span class="material-symbols-outlined">logout</span><span>تسجيل الخروج</span></span></button>
+  </div>
+</aside>
+
+<div class="admin-main">
+  <header class="admin-topbar">
+    <div class="d-flex align-items-center gap-sm min-w-0">
+      <button type="button" class="icon-btn" data-admin-open aria-label="القائمة" aria-controls="admin-sidebar"><span class="material-symbols-outlined">menu</span></button>
+      <h1 class="t-headline-sm c-on-surface text-truncate" id="pageTitle">الإدارة</h1>
+    </div>
+    <div class="d-flex align-items-center gap-sm">
+      <a href="../index.html" target="_blank" class="btn-bs btn-ghost-bs btn-xs-bs d-none d-sm-inline-flex">عرض الموقع</a>
+      <div class="user-pill"><span class="material-symbols-outlined">account_circle</span><span data-admin-name></span></div>
+    </div>
+  </header>
+  <main class="admin-content" id="main">
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-md">
+  <div class="d-flex align-items-center gap-sm flex-wrap">
+    <span class="icon-tile icon-tile-sm"><span class="material-symbols-outlined" id="entityIcon"></span></span>
+    <div>
+      <h2 class="t-headline-sm c-on-surface" id="entityTitle"></h2>
+      <p class="t-body-md c-variant" id="totalText">&nbsp;</p>
+    </div>
+  </div>
+  <button type="button" class="btn-bs btn-primary-bs d-none" data-add>
+    <span class="material-symbols-outlined">add</span><span id="addLabel"></span>
+  </button>
+</div>
+
+<div class="d-flex flex-wrap gap-sm align-items-center d-none" id="filterChips"></div>
+
+<section class="bs-card overflow-hidden">
+  <div class="card-head">
+    <div class="input-icon flex-grow-1" style="max-width:24rem">
+      <span class="material-symbols-outlined">search</span>
+      <input type="search" id="search" class="form-control" placeholder="بحث…" aria-label="بحث">
+    </div>
+    <select id="statusFilter" class="form-select d-none" style="max-width:14rem">
+      <option value="">كل الحالات</option>
+    </select>
+  </div>
+  <div class="table-wrap">
+    <table class="table-bs" id="dataTable">
+      <thead><tr id="headRow"></tr></thead>
+      <tbody id="rows"><tr><td class="text-center py-5"><span class="spinner-border spinner-border-sm c-primary"></span></td></tr></tbody>
+    </table>
+  </div>
+  <div class="card-head divider-top" style="border-bottom:0">
+    <span class="t-body-md c-variant" id="pageInfo"></span>
+    <nav class="pager p-0" id="pager" aria-label="ترقيم الصفحات"></nav>
+  </div>
+</section>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-fullscreen-sm-down">
+    <form class="modal-content" id="editForm" novalidate enctype="multipart/form-data">
+      <div class="modal-header">
+        <h2 class="modal-title t-title-lg" id="editTitle"></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3" id="formFields"></div>
+        <div class="form-alert error d-none mt-3" id="formAlert"></div>
+      </div>
+      <div class="modal-footer justify-content-start gap-sm">
+        <button type="submit" class="btn-bs btn-primary-bs"><span class="material-symbols-outlined">save</span><span>حفظ</span></button>
+        <button type="button" class="btn-bs btn-ghost-bs" data-bs-dismiss="modal">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4 d-flex flex-column gap-md text-center align-items-center">
+        <span class="icon-tile icon-tile-error"><span class="material-symbols-outlined">delete</span></span>
+        <h2 class="t-title-lg">تأكيد الحذف</h2>
+        <p class="t-body-md c-variant" id="deleteText">هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء.</p>
+        <div class="d-flex gap-sm">
+          <button type="button" class="btn-bs btn-danger-soft-bs" id="confirmDelete">نعم، احذف</button>
+          <button type="button" class="btn-bs btn-ghost-bs" data-bs-dismiss="modal">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </main>
+</div>
+
+<div class="toast-wrap" id="toasts" aria-live="polite"></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/manage.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المنتجات — شركة بيسان للتكييف والتبريد</title>
+  <meta name="description" content="حلول التكييف والتبريد في فلسطين: بيع، تركيب، وصيانة.">
+  <meta name="theme-color" content="#006184">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body data-page="products">
+<a href="#main" class="visually-hidden-focusable btn-bs btn-primary-bs position-absolute m-2" style="z-index:2000">تخطَّ إلى المحتوى</a>
+
+<div data-include="partials/header.html"></div>
+
+<main id="main">
+<div class="container-bs page-head pb-5 d-flex flex-column gap-xl">
+  <div class="d-flex flex-column gap-xs">
+    <nav aria-label="مسار التنقل" class="breadcrumb-bs">
+      <a href="index.html">الرئيسية</a>
+      <span class="material-symbols-outlined">chevron_left</span>
+      <span class="current">المنتجات</span>
+    </nav>
+    <h1 class="t-headline-lg c-on-surface">كتالوج منتجات التكييف والتبريد</h1>
+  </div>
+
+  <div class="row g-4 g-lg-5 align-items-start">
+    <aside class="col-lg-3">
+      <form id="filters" class="bs-card p-lg d-flex flex-column gap-lg" onsubmit="return false">
+        <div class="d-flex align-items-center justify-content-between divider-bottom pb-2">
+          <h2 class="t-title-lg c-on-surface">تصفية النتائج</h2>
+          <button type="reset" class="btn p-0 t-label-sm c-primary" id="resetFilters">إعادة ضبط</button>
+        </div>
+
+        <div class="filter-group" id="categoryFilter">
+          <h3 class="t-label-lg c-on-surface">الفئة</h3>
+        </div>
+
+        <div class="filter-group" id="brandFilter">
+          <h3 class="t-label-lg c-on-surface">العلامة التجارية</h3>
+        </div>
+
+        <div class="filter-group">
+          <h3 class="t-label-lg c-on-surface">نطاق السعر (₪)</h3>
+          <div class="d-flex align-items-center gap-sm">
+            <input type="number" name="min" min="0" step="50" class="form-control tabular" aria-label="أقل سعر">
+            <span class="c-variant">—</span>
+            <input type="number" name="max" min="0" step="50" class="form-control tabular" aria-label="أعلى سعر">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3 class="t-label-lg c-on-surface">حالة التوفر</h3>
+          <label class="check-bs"><input type="radio" name="available" value="" checked><span>الكل</span></label>
+          <label class="check-bs"><input type="radio" name="available" value="1"><span>متوفر فقط</span></label>
+        </div>
+      </form>
+    </aside>
+
+    <section class="col-lg-9 d-flex flex-column gap-lg">
+      <div class="bs-card p-md d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-md">
+        <div class="input-icon flex-grow-1" style="max-width:28rem">
+          <span class="material-symbols-outlined">search</span>
+          <input type="search" id="q" form="filters" name="q" class="form-control" placeholder="ابحث باسم المكيف، الماركة، أو الموديل..." aria-label="بحث">
+        </div>
+        <div class="d-flex align-items-center gap-sm">
+          <label for="sort" class="t-label-lg c-variant text-nowrap mb-0">ترتيب حسب:</label>
+          <select id="sort" name="sort" form="filters" class="form-select">
+            <option value="popular">الأكثر مبيعاً</option>
+            <option value="price_asc">السعر: من الأقل للأعلى</option>
+            <option value="price_desc">السعر: من الأعلى للأقل</option>
+            <option value="newest">الأحدث وصولاً</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="t-body-md c-variant" id="resultCount" aria-live="polite"></p>
+      <div class="grid-cards cols-3-xl" id="grid" aria-busy="true">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </div>
+      <nav class="pager" id="pager" aria-label="ترقيم الصفحات"></nav>
+    </section>
+  </div>
+</div>
+</main>
+
+<div data-include="partials/footer.html"></div>
+
+<div class="toast-wrap" id="toasts" aria-live="polite"></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/products.js"></script>
+</body>
+</html>

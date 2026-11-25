@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS bisan_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'bisan'@'localhost' IDENTIFIED BY 'Bisan#Db2026';
+GRANT ALL PRIVILEGES ON bisan_db.* TO 'bisan'@'localhost';
+FLUSH PRIVILEGES;
